@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Abhash/AndroidStudioProjects/FirebaseChat/app/src/main/res/drawable/round_profile_icon.xml" value="0.1845" />
         <entry key="..\:/Users/Abhash/AndroidStudioProjects/FirebaseChat/app/src/main/res/drawable/rounded_button.xml" value="0.1" />
         <entry key="..\:/Users/Abhash/AndroidStudioProjects/FirebaseChat/app/src/main/res/drawable/rounded_edittext.xml" value="0.1" />
         <entry key="..\:/Users/Abhash/AndroidStudioProjects/FirebaseChat/app/src/main/res/layout/activity_login.xml" value="0.3233695652173913" />
