@@ -20,6 +20,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -44,12 +45,6 @@ class MainActivity : AppCompatActivity() {
             intent.type="image/*"
             startActivityForResult(intent,0)
         }
-        val imageButton:ImageButton=findViewById(R.id.imageButton)
-        imageButton.setOnClickListener{
-            val intent=Intent(Intent.ACTION_PICK)
-            intent.type="image/*"
-            startActivityForResult(intent,0)
-        }
     }
 
     var selectPhotoUri: Uri?=null
@@ -61,12 +56,15 @@ class MainActivity : AppCompatActivity() {
             //val inputStream=uri?.let { contentResolver.openInputStream(it) }
             //val drawable=Drawable.createFromStream(inputStream,uri.toString())
             val bitmap=MediaStore.Images.Media.getBitmap(contentResolver,selectPhotoUri)
-            //Sval bitmapDrawable=BitmapDrawable(bitmap)
-            //val btnSelectPhoto:Button=findViewById(R.id.btnSelectPhoto)
+            //val bitmapDrawable=BitmapDrawable(bitmap)
+            val btnSelectPhoto:Button=findViewById(R.id.btnSelectPhoto)
             //btnSelectPhoto.setBackgroundDrawable(bitmapDrawable)
             //btnSelectPhoto.background=drawable
-            val imageButton:ImageButton=findViewById(R.id.imageButton)
-            imageButton.setImageBitmap(bitmap)
+            //val imageButton:ImageButton=findViewById(R.id.imageButton)
+            //imageButton.setImageBitmap(bitmap)
+            val circleImage:CircleImageView=findViewById(R.id.circleImage)
+            circleImage.setImageBitmap(bitmap)
+            btnSelectPhoto.alpha=0f
         }
     }
 
