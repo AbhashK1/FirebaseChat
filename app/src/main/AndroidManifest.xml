@@ -10,16 +10,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FirebaseChat">
         <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".messages.LatestMessageActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".registerlogin.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".registerlogin.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".messages.NewMessageActivity"
+            android:exported="false" >
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".messages.LatestMessageActivity"/>
         </activity>
     </application>
 

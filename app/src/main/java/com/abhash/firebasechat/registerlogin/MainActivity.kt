@@ -1,20 +1,18 @@
-package com.abhash.firebasechat
+package com.abhash.firebasechat.registerlogin
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.ImageDecoder
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import android.media.Image
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import com.abhash.firebasechat.R
+import com.abhash.firebasechat.messages.LatestMessageActivity
+import com.abhash.firebasechat.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -32,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         val password:TextView=findViewById(R.id.txtPassword)
         val btnSelectPhoto:Button=findViewById(R.id.btnSelectPhoto)
         txtHaveAccount.setOnClickListener{
-            val intent= Intent(this,LoginActivity::class.java)
+            val intent= Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
         val btnRegister: Button =findViewById(R.id.btnRegister)
@@ -115,11 +113,14 @@ class MainActivity : AppCompatActivity() {
         val uid=FirebaseAuth.getInstance().uid ?:""
         val ref=FirebaseDatabase.getInstance("https://fir-chat-b74bb-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("/users/$uid")
         val username:TextView=findViewById(R.id.txtName)
-        val user=User(uid,username.text.toString(),profileImageUrl)
+        val user= User(uid,username.text.toString(),profileImageUrl)
         ref.setValue(user)
             .addOnSuccessListener {
                 Toast.makeText(baseContext, "Saved to Database",
                     Toast.LENGTH_SHORT).show()
+                val intent=Intent(this, LatestMessageActivity::class.java)
+                intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
             }
             .addOnFailureListener{
                 Toast.makeText(baseContext, "Upload UnSuccessful",
@@ -127,5 +128,3 @@ class MainActivity : AppCompatActivity() {
             }
     }
 }
-
-class User(val uid:String, val username:String, val profileImageUrl:String)

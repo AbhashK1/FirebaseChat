@@ -1,7 +1,8 @@
-package com.abhash.firebasechat
+package com.abhash.firebasechat.registerlogin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.abhash.firebasechat.R
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
