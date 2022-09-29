@@ -1,5 +1,6 @@
 package com.abhash.firebasechat.messages
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,7 @@ import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
+import kotlinx.android.synthetic.main.activity_new_message.*
 import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
 class NewMessageActivity : AppCompatActivity() {
@@ -34,6 +36,10 @@ class NewMessageActivity : AppCompatActivity() {
         fetchUsers()
     }
 
+    companion object{
+        val USER_KEY = "USER_KEY"
+    }
+
     private fun fetchUsers(){
         val ref =FirebaseDatabase.getInstance("https://fir-chat-b74bb-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("/users")
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
@@ -44,8 +50,18 @@ class NewMessageActivity : AppCompatActivity() {
                     if(user!=null){
                         adapter.add(UserItem(user))
                     }
-                    val recyclerview_newmessage: RecyclerView = findViewById(R.id.newMessageRecyclerView)
-                    recyclerview_newmessage.adapter=adapter
+
+                    adapter.setOnItemClickListener { item, view ->
+
+                        val userItem=item as UserItem
+                        val intent= Intent(view.context,ChatLogActivity::class.java)
+                        //intent.putExtra(USER_KEY,item.user.username)
+                        intent.putExtra(USER_KEY,userItem.user)
+                        startActivity(intent)
+                        finish()
+                    }
+
+                    newMessageRecyclerView.adapter=adapter
                 }
             }
 
